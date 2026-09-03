@@ -1,0 +1,17 @@
+{
+  "name": "codefactory-devops",
+  "version": "1.0.0",
+  "description": "Projeto da CodeFactory Solutions para o trabalho de DevOps - api simples com docker e CI",
+  "main": "src/servidor.js",
+  "scripts": {
+    "inicio": "node src/servidor.js",
+    "teste": "node --test src/*.test.js",
+    "test": "node --test src/*.test.js",
+    "verificar": "node --check src/servidor.js && node --check src/rotas.js && echo verificacao ok"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "pg": "^8.12.0"
+  },
+  "license": "MIT"
+}
