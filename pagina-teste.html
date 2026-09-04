@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>CodeFactory - Teste</title>
+  <style>
+    #cabecalhoPrincipal { background: #222; color: #fff; padding: 16px; }
+    .botaoEnviar { background: #2e7d32; color: white; padding: 10px; border: 0; }
+    .cartaoCliente { border: 1px solid #ccc; margin: 8px; padding: 8px; }
+  </style>
+</head>
+<body>
+  <div id="cabecalhoPrincipal">
+    <h1>CodeFactory Solutions</h1>
+    <p>Trabalho de DevOps - Matheus Barreto de Jesus RU 5217171</p>
+  </div>
+
+  <div id="conteudoPrincipal">
+    <button class="botaoEnviar" onclick="carregarClientes()">Carregar clientes</button>
+    <div id="listaClientes"></div>
+  </div>
+
+  <script>
+    async function carregarClientes() {
+      const resposta = await fetch('http://localhost:3000/clientes');
+      const lista = await resposta.json();
+      const area = document.getElementById('listaClientes');
+      area.innerHTML = '';
+      lista.forEach(function (item) {
+        const div = document.createElement('div');
+        div.className = 'cartaoCliente';
+        div.textContent = item.codigo + ' - ' + item.nomeCliente;
+        area.appendChild(div);
+      });
+    }
+  </script>
+</body>
+</html>
