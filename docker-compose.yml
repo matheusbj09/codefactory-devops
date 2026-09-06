@@ -1,0 +1,27 @@
+services:
+  api:
+    build: .
+    container_name: codefactory-api
+    ports:
+      - "3000:3000"
+    environment:
+      - PORTA=3000
+      - DATABASE_URL=postgres://postgres:postgres@db:5432/codefactory
+    depends_on:
+      - db
+
+  db:
+    image: postgres:16-alpine
+    container_name: codefactory-banco
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=codefactory
+    ports:
+      - "5432:5432"
+    volumes:
+      - dados-banco:/var/lib/postgresql/data
+      - ./banco-criar-tabelas.sql:/docker-entrypoint-initdb.d/banco-criar-tabelas.sql
+
+volumes:
+  dados-banco:
