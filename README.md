@@ -54,7 +54,11 @@ npm run inicio
 # abre http://localhost:3000/saude
 ```
 
-Com docker (api + banco com tabela clientes - precisa do Docker Desktop):
+
+Com docker (jeito recomendado, sobe api + banco juntos - precisa do Docker Desktop):
+
+Com docker (jeito recomendado, sobe api + banco juntos - precisa do Docker Desktop):
+
 ```powershell
 docker compose up --build
 # api em http://localhost:3000/saude

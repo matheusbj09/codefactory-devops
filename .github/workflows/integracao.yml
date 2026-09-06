@@ -1,0 +1,32 @@
+name: integracao
+
+# roda em todo push e PR pra main e desenvolvimento
+on:
+  push:
+    branches: [main, desenvolvimento]
+  pull_request:
+    branches: [main, desenvolvimento]
+
+jobs:
+  teste-e-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: baixar codigo
+        uses: actions/checkout@v4
+
+      - name: instalar node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: instalar pacotes
+        run: npm ci || npm install
+
+      - name: verificacao simples
+        run: npm run verificar
+
+      - name: rodar testes
+        run: npm test
+
+      - name: build do docker
+        run: docker build -t codefactory-api .
