@@ -1,4 +1,4 @@
-# CodeFactory Solutions — Adoção DevOps
+﻿# CodeFactory Solutions — Adoção DevOps
 
 Trabalho prático de DevOps e Integração Contínua.
 Aluno: **Matheus Barreto de Jesus — RU 5217171**
@@ -54,7 +54,7 @@ npm run inicio
 # abre http://localhost:3000/saude
 ```
 
-Com docker (api + banco com tabela clientes):
+Com docker (api + banco com tabela clientes - precisa do Docker Desktop):
 ```powershell
 docker compose up --build
 # api em http://localhost:3000/saude
