@@ -41,3 +41,4 @@ async function listarClientes(req, res) {
 }
 
 module.exports = { paginaInicial, rotaSaude, listarClientes };
+// ajuste rapido na mensagem inicial
