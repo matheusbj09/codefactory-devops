@@ -1,5 +1,4 @@
-// servidor simples feito para o trabalho de DevOps
-// aluno: Matheus Barreto de Jesus RU 5217171
+// servidor
 const express = require('express');
 const { rotaSaude, listarClientes, paginaInicial } = require('./rotas');
 
@@ -8,12 +7,18 @@ const paginaInicialApp = express();
 
 paginaInicialApp.use(express.json());
 
+// libera acesso pra pagina-teste.html abrir direto do navegador
+paginaInicialApp.use((req, res, proximo) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  proximo();
+});
+
 // rota principal
 paginaInicialApp.get('/', paginaInicial);
 
 // rota de saude que o docker e o CI usam pra saber se ta no ar
 paginaInicialApp.get('/saude', rotaSaude);
-paginaInicialApp.get('/health', rotaSaude); // alias pra facilitar
+paginaInicialApp.get('/health', rotaSaude); 
 
 // lista de clientes (vem do banco se tiver, senao lista fixa)
 paginaInicialApp.get('/clientes', listarClientes);

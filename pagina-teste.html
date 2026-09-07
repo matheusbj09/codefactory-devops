@@ -2,37 +2,111 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>CodeFactory - Teste</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodeFactory - Painel de Teste</title>
   <style>
-    #cabecalhoPrincipal { background: #222; color: #fff; padding: 16px; }
-    .botaoEnviar { background: #2e7d32; color: white; padding: 10px; border: 0; }
-    .cartaoCliente { border: 1px solid #ccc; margin: 8px; padding: 8px; }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, Helvetica, sans-serif; }
+    body { background: #f0f2f5; color: #333; }
+    #cabecalhoPrincipal { background: linear-gradient(90deg, #1b5e20, #2e7d32); color: #fff; padding: 28px 20px; text-align: center; }
+    #cabecalhoPrincipal h1 { font-size: 26px; margin-bottom: 6px; }
+    #cabecalhoPrincipal p { font-size: 14px; opacity: 0.9; }
+    #faixaEstado { background: #fff; border-bottom: 1px solid #ddd; padding: 10px 20px; text-align: center; font-size: 14px; }
+    #estadoApi { font-weight: bold; }
+    .estadoOk { color: #2e7d32; }
+    .estadoErro { color: #c62828; }
+    #conteudoPrincipal { max-width: 700px; margin: 24px auto; padding: 0 16px; }
+    .linhaBotoes { display: flex; gap: 10px; margin-bottom: 16px; }
+    .botaoEnviar { flex: 1; background: #2e7d32; color: white; padding: 12px; border: 0; border-radius: 6px; font-size: 15px; cursor: pointer; }
+    .botaoEnviar:hover { background: #1b5e20; }
+    .botaoSecundario { flex: 1; background: #fff; color: #2e7d32; padding: 12px; border: 1px solid #2e7d32; border-radius: 6px; font-size: 15px; cursor: pointer; }
+    .botaoSecundario:hover { background: #e8f5e9; }
+    .cartaoCliente { background: #fff; border: 1px solid #ddd; border-left: 5px solid #2e7d32; border-radius: 6px; margin-bottom: 10px; padding: 12px 14px; }
+    .cartaoCliente strong { font-size: 16px; display: block; }
+    .cartaoCliente span { font-size: 13px; color: #666; }
+    #mensagemErro { background: #ffebee; color: #c62828; border: 1px solid #ef9a9a; border-radius: 6px; padding: 12px; margin-bottom: 12px; display: none; }
+    #carregando { text-align: center; color: #666; display: none; margin: 12px 0; }
+    #rodapePagina { text-align: center; font-size: 12px; color: #999; padding: 20px; }
   </style>
 </head>
 <body>
   <div id="cabecalhoPrincipal">
     <h1>CodeFactory Solutions</h1>
-    <p>Trabalho de DevOps - Matheus Barreto de Jesus RU 5217171</p>
+    <p>Painel de teste da API — Trabalho de DevOps | Matheus Barreto de Jesus RU 5217171</p>
+  </div>
+
+  <div id="faixaEstado">
+    Estado da API: <span id="estadoApi">verificando...</span>
   </div>
 
   <div id="conteudoPrincipal">
-    <button class="botaoEnviar" onclick="carregarClientes()">Carregar clientes</button>
+    <div class="linhaBotoes">
+      <button class="botaoEnviar" onclick="carregarClientes()">Carregar clientes</button>
+      <button class="botaoSecundario" onclick="verificarSaude()">Verificar API</button>
+    </div>
+    <div id="mensagemErro"></div>
+    <div id="carregando">carregando...</div>
     <div id="listaClientes"></div>
   </div>
 
+  <div id="rodapePagina">
+    Feito para a matéria de DevOps e Integração Contínua — 2026
+  </div>
+
   <script>
-    async function carregarClientes() {
-      const resposta = await fetch('http://localhost:3000/clientes');
-      const lista = await resposta.json();
-      const area = document.getElementById('listaClientes');
-      area.innerHTML = '';
-      lista.forEach(function (item) {
-        const div = document.createElement('div');
-        div.className = 'cartaoCliente';
-        div.textContent = item.codigo + ' - ' + item.nomeCliente;
-        area.appendChild(div);
-      });
+    var enderecoApi = 'http://localhost:3000';
+
+    async function verificarSaude() {
+      var campo = document.getElementById('estadoApi');
+      try {
+        const resposta = await fetch(enderecoApi + '/saude');
+        const dados = await resposta.json();
+        if (dados.estado === 'ok') {
+          campo.textContent = 'no ar ✓';
+          campo.className = 'estadoOk';
+        } else {
+          campo.textContent = 'resposta estranha';
+          campo.className = 'estadoErro';
+        }
+      } catch (e) {
+        campo.textContent = 'fora do ar — suba com docker compose up';
+        campo.className = 'estadoErro';
+      }
     }
+
+    async function carregarClientes() {
+      var area = document.getElementById('listaClientes');
+      var erro = document.getElementById('mensagemErro');
+      var carregando = document.getElementById('carregando');
+      erro.style.display = 'none';
+      carregando.style.display = 'block';
+      area.innerHTML = '';
+      try {
+        const resposta = await fetch(enderecoApi + '/clientes');
+        const lista = await resposta.json();
+        carregando.style.display = 'none';
+        if (lista.length === 0) {
+          area.innerHTML = '<p>Nenhum cliente cadastrado.</p>';
+          return;
+        }
+        lista.forEach(function (item) {
+          const div = document.createElement('div');
+          div.className = 'cartaoCliente';
+          var nome = document.createElement('strong');
+          nome.textContent = item.codigo + ' - ' + item.nomeCliente;
+          var cidade = document.createElement('span');
+          cidade.textContent = item.cidade || '';
+          div.appendChild(nome);
+          div.appendChild(cidade);
+          area.appendChild(div);
+        });
+      } catch (e) {
+        carregando.style.display = 'none';
+        erro.textContent = 'Não consegui falar com a API. Veja se o container tá rodando (docker ps).';
+        erro.style.display = 'block';
+      }
+    }
+
+    verificarSaude();
   </script>
 </body>
 </html>
