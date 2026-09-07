@@ -7,6 +7,6 @@ CREATE TABLE IF NOT EXISTS clientes (
 );
 
 INSERT INTO clientes (nome, cidade) VALUES
-  ('Padaria Pao Quente', 'Curitiba'),
-  ('Oficina do Ze', 'Sao Jose dos Pinhais')
+  ('Padaria Pao Quente', 'Aracaju'),
+  ('Oficina do Ze', 'Barra dos Coqueiros')
 ON CONFLICT DO NOTHING;

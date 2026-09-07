@@ -1,4 +1,4 @@
-// rotas da api - deixei tudo com nome em portugues de proposito
+// rotas da api 
 function paginaInicial(req, res) {
   res.json({
     mensagem: 'API CodeFactory no ar',
@@ -11,12 +11,11 @@ function rotaSaude(req, res) {
   res.json({ estado: 'ok', horario: new Date().toISOString() });
 }
 
-// tenta buscar do banco, se nao tiver banco retorna lista fixa
-// assim funciona com e sem docker
+
 async function listarClientes(req, res) {
   const listaFixa = [
-    { codigo: 1, nomeCliente: 'Padaria Pao Quente', cidade: 'Curitiba' },
-    { codigo: 2, nomeCliente: 'Oficina do Ze', cidade: 'Sao Jose dos Pinhais' }
+    { codigo: 1, nomeCliente: 'Padaria Pao Quente', cidade: 'Aracaju' },
+    { codigo: 2, nomeCliente: 'Oficina do Ze', cidade: 'Barra dos Coqueiros' }
   ];
 
   // se tiver DATABASE_URL tenta usar, senao cai na lista fixa
@@ -41,4 +40,4 @@ async function listarClientes(req, res) {
 }
 
 module.exports = { paginaInicial, rotaSaude, listarClientes };
-// ajuste rapido na mensagem inicial
+
