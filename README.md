@@ -41,7 +41,7 @@ codefactory-devops/
 Precisa ter Node 20, Git e Docker instalados.
 
 ```powershell
-git clone https://github.com/SEU-USUARIO/codefactory-devops.git
+git clone https://github.com/matheusbj09/codefactory-devops.git
 cd codefactory-devops
 npm install
 ```
