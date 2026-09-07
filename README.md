@@ -1,27 +1,30 @@
 ﻿# CodeFactory Solutions — Adoção DevOps
 
 Trabalho prático de DevOps e Integração Contínua.
-Aluno: **Matheus Barreto de Jesus — RU 5217171**
+Meu nome é **Matheus Barreto de Jesus — RU 5217171**.
 
 ## Descrição
 
-A CodeFactory cresceu de 2 pra 8 pessoas e começou a atrasar entrega, dar erro depois de atualizar e cada dev com um ambiente diferente. Esse projeto mostra na prática como organizar isso com Git, Docker e Integração Contínua usando uma API bem simples de exemplo.
+Eu escolhi o caso da CodeFactory porque ele parece muito com o que eu vejo no dia a dia: a empresa cresceu de 2 pra 8 pessoas e começou a atrasar entrega, dar erro depois de atualizar e cada dev com um ambiente diferente. Nesse projeto eu mostro na prática como eu organizei isso com Git, Docker e Integração Contínua usando uma API bem simples que eu mesmo fiz de exemplo.
 
 ## Objetivo
 
-Deixar o fluxo mais organizado, colaborativo e automatizado:
-- versionar tudo no Git/GitHub com branches e Pull Requests
-- padronizar o ambiente com Docker (api + banco)
-- rodar teste e build automático a cada push (GitHub Actions)
+O meu objetivo foi deixar o fluxo mais organizado, colaborativo e automatizado:
+- eu versionei tudo no Git/GitHub com branches e Pull Requests
+- eu padronizei o ambiente com Docker (api + banco)
+- eu configurei teste e build automático a cada push com GitHub Actions
 
 ## Tecnologias utilizadas
 
-- Node.js 20 + Express
-- PostgreSQL 16 (via Docker)
-- Docker e Docker Compose
-- GitHub Actions (pipeline de CI)
+As tecnologias que eu usei foram:
+- Node.js 20 + Express (pra API)
+- PostgreSQL 16 (via Docker, pro banco)
+- Docker e Docker Compose (pra padronizar o ambiente)
+- GitHub Actions (pra pipeline de CI)
 
 ## Estrutura de pastas
+
+Eu organizei o projeto assim:
 
 ```
 codefactory-devops/
@@ -29,7 +32,7 @@ codefactory-devops/
 │   ├── servidor.js      # sobe a api na porta 3000
 │   ├── rotas.js         # rotas / , /saude e /clientes
 │   └── rotas.test.js    # testes simples pro CI rodar
-├── pagina-teste.html    # pagina simples pra testar a api
+├── pagina-teste.html    # pagina simples que eu fiz pra testar a api no navegador
 ├── Dockerfile
 ├── docker-compose.yml
 ├── banco-criar-tabelas.sql
@@ -38,7 +41,7 @@ codefactory-devops/
 
 ## Como instalar
 
-Precisa ter Node 20, Git e Docker instalados.
+Pra rodar aí você precisa ter Node 20, Git e Docker instalados. Eu usei Windows com PowerShell.
 
 ```powershell
 git clone https://github.com/matheusbj09/codefactory-devops.git
@@ -54,8 +57,7 @@ npm run inicio
 # abre http://localhost:3000/saude
 ```
 
-
-Com docker (jeito recomendado, sobe api + banco juntos - precisa do Docker Desktop):
+Com docker (é o jeito que eu recomendo, sobe api + banco juntos - precisa do Docker Desktop):
 
 ```powershell
 docker compose up --build
@@ -70,13 +72,14 @@ docker compose down
 
 ## Rotas
 
+As rotas que eu criei:
 - `GET /` — mensagem inicial
 - `GET /saude` — retorna `{ "estado": "ok" }`
 - `GET /clientes` — lista do banco se tiver, senão lista fixa
 
 ## Pipeline (CI)
 
-Arquivo `.github/workflows/integracao.yml`. A cada push/PR pra `main` ou `desenvolvimento` ele:
+Eu criei o arquivo `.github/workflows/integracao.yml`. A cada push/PR pra `main` ou `desenvolvimento` ele:
 1. baixa o código
 2. instala o Node 20
 3. instala pacotes
@@ -85,8 +88,8 @@ Arquivo `.github/workflows/integracao.yml`. A cada push/PR pra `main` ou `desenv
 
 ## Licença
 
-MIT — pode usar à vontade. Veja o arquivo LICENSE.
+Eu deixei como MIT — pode usar à vontade. Veja o arquivo LICENSE.
 
 ## Versão
 
-v1.0 — entrega do trabalho.
+v1.0 — entrega do meu trabalho.
