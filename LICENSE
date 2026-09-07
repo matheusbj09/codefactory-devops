@@ -1,10 +1,15 @@
-Licença de uso (MIT)
+Termo de Licença de Uso — Projeto CodeFactory DevOps (MIT)
 
-Esse projeto foi feito por mim, Matheus Barreto de Jesus (RU 5217171),
-para o trabalho de DevOps e Integração Contínua, e segue a licença MIT.
+Este projeto foi desenvolvido por mim, Matheus Barreto de Jesus
+(RU 5217171), como trabalho prático da disciplina de DevOps e
+Integração Contínua, com base no caso da empresa fictícia
+CodeFactory Solutions. Ele segue a licença MIT.
 
-O que isso significa na prática: você pode usar, copiar, modificar e
-distribuir esse código livremente, inclusive em outros trabalhos, desde
-que mantenha os créditos ao autor original.
+Com isso, eu autorizo qualquer pessoa a usar este projeto para fins
+de estudo: pode baixar, executar com Node.js e Docker, modificar o
+código, reutilizar o Dockerfile, o docker-compose e a pipeline de CI
+em outros trabalhos, desde que mantenha os créditos ao autor original.
 
-O código é fornecido como está, sem garantias. Use por sua conta e risco.
+Este projeto foi feito com finalidade acadêmica e é fornecido como
+está, sem garantias de funcionamento em outros ambientes. Use por
+sua conta e risco.
